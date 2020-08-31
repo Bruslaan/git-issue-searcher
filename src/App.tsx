@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { QueryResults, IssueState, SearchLocation } from './QueryResults/QueryResults'
+import SearchComponent from './SearchComponent'
+import { client } from './graphQlClient'
 
 function App() {
+  const [searchTerm, setsearchTerm] = useState<String>("")
+
+  const changeSearchTerm=(term:String)=>{
+    setsearchTerm(term)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SearchComponent onChangeTerm={changeSearchTerm} />
+      <ApolloProvider client={client}>
+        <QueryResults term={searchTerm} issueState={IssueState.open} searchLocation={SearchLocation.title} />
+      </ApolloProvider>
     </div>
+
   );
 }
 
