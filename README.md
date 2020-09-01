@@ -2,4 +2,4 @@
 npm i
 
 
-npm start
+REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN={YOUR_GIT_TOKEN_HERE} npm start

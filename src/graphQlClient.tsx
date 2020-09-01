@@ -10,7 +10,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = "cf6bbb5ee848cffc5d959384e53236b33ce6e5c4"
+  const token = process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -27,11 +27,6 @@ export const client = new ApolloClient({
       Query: {
         fields: {
           repository: {
-            merge(existing, incoming) {
-              return { ...existing, ...incoming };
-            },
-          },
-          comments: {
             merge(existing, incoming) {
               return { ...existing, ...incoming };
             },

@@ -6,10 +6,9 @@ import './index.css'
 
 
 interface Props {
-    issueNumber?: number,
+    issueNumber: number,
     repoOwner: String,
     repoName: String,
-
 }
 
 const FetchComments: React.FC<Props> = ({ issueNumber, repoName, repoOwner }) => {
@@ -20,6 +19,7 @@ const FetchComments: React.FC<Props> = ({ issueNumber, repoName, repoOwner }) =>
         variables: { number, repoOwner, repoName },
     });
 
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error!</p>;
 
@@ -28,25 +28,27 @@ const FetchComments: React.FC<Props> = ({ issueNumber, repoName, repoOwner }) =>
 
     if (data.repository.issue.comments.edges.length === 0) return <p>No Comments</p>
 
-    const loadMoreComments = () => {
-        console.log("Load more Comments")
-        const endCursor = data.repository.issue.comments.pageInfo.endCursor
-        fetchMore({
 
+    // paginate through comments
+    const loadMoreComments = async () => {
+        const endCursor = data.repository.issue.comments.pageInfo.endCursor
+        const newComments = await fetchMore({
             variables: {
-                cursor: endCursor
+                cursor: endCursor as String
             },
         })
+        console.log(newComments)
     }
+
+
     return (<div>
 
         {comments.map((item: any) => {
             return <div className="issue__comment" key={item.node.id}>
                 <p> Comment: {item.node.body}</p>
-                <button onClick={loadMoreComments}>Load more Comments</button>
             </div>
         })}
-
+        <button onClick={loadMoreComments}>Load more Comments</button>
     </div>)
 
 

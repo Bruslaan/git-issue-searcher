@@ -29,7 +29,7 @@ query ($number: Int! $cursor: String $repoOwner: String! $repoName: String!){
   repository(owner: $repoOwner, name: $repoName) {
     issue(number: $number) {
       id
-      comments(first: 1 after: $cursor) {
+      comments(first: 2 after: $cursor) {
         edges {
           node {
             id

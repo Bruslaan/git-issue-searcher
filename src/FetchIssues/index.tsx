@@ -16,10 +16,12 @@ interface Props {
 export const QueryResults: React.FC<Props> = ({ term, searchLocation, issueState, repoName }) => {
 
 
+  // query params
   const state = issueState === IssueState.both ? "" : `state:${issueState}`
   const repo = `repo:${repoName}`
   const location = searchLocation === SearchLocation.both ? `in:${SearchLocation.title},${SearchLocation.body}` : `in:${searchLocation}`
 
+  // concat query params
   const queryParameters = `${repo} ${location} ${term} ${state} type:issue`
 
 
@@ -27,6 +29,7 @@ export const QueryResults: React.FC<Props> = ({ term, searchLocation, issueState
     variables: { queryParameters },
   });
 
+  // Comments search needs an repoowner and reponame as an own arg
   const [splittedRepoOwner, splittedRepoName] = repoName.split("/")
 
   if (loading) return <p>Loading...</p>;

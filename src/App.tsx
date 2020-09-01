@@ -9,8 +9,8 @@ import { IssueState, SearchLocation } from './interfaces';
 function App() {
   const [repoName, setrepoName] = useState<String>("facebook/react")
   const [searchTerm, setsearchTerm] = useState<String>("")
-  const [issueState, setissueState] = useState<IssueState>(IssueState.open)
-  const [searchLocation, setsearchLocation] = useState<SearchLocation>(SearchLocation.title)
+  const [issueState, setissueState] = useState<IssueState>(IssueState.both)
+  const [searchLocation, setsearchLocation] = useState<SearchLocation>(SearchLocation.both)
   const changeSearchTerm = (term: String) => {
     setsearchTerm(term)
   }
@@ -31,7 +31,7 @@ function App() {
     <div className="container">
 
       <div className="searchBar">
-        <input type="text" placeholder="facebook/react" onChange={changeRepoName} />
+        <input type="text" placeholder="default: facebook/react" onChange={changeRepoName} />
         <SearchComponent onChangeTerm={changeSearchTerm} />
         <SelectComponent onSelectChange={changeIssueState} items={[IssueState.both, IssueState.open, IssueState.closed]} />
         <SelectComponent onSelectChange={changeLocation} items={[SearchLocation.both, SearchLocation.title, SearchLocation.body]} />
