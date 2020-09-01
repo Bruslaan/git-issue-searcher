@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import './index.css'
 
 interface Props {
     onChangeTerm: (term:String) => void
@@ -20,7 +20,7 @@ const SearchComponent: React.FC<Props> = ({ onChangeTerm }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className="search__box" onSubmit={handleSubmit}>
                 <input value={term} onChange={handleInputFieldChange} placeholder="Search ..." />
                 <button type="submit" value="Submit">Search</button>
             </form>

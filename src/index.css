@@ -24,3 +24,11 @@ html, body{
     margin:auto;
 
 }
+
+input{
+    /* padding:5px; */
+    border: 1px solid gray;
+    width: 300px;
+
+
+}

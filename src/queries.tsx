@@ -25,11 +25,11 @@ query ($queryParameters: String!)
 
 
 export const GET_COMMENTS_OF_ISSUE = gql`
-query ($number: Int!){
-  repository(owner: "facebook", name: "react") {
+query ($number: Int! $cursor: String $repoOwner: String! $repoName: String!){
+  repository(owner: $repoOwner, name: $repoName) {
     issue(number: $number) {
       id
-      comments(first: 1) {
+      comments(first: 1 after: $cursor) {
         edges {
           node {
             id

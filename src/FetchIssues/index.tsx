@@ -3,6 +3,8 @@ import { useQuery } from '@apollo/client';
 import { SearchLocation, IssueState, Issue } from '../interfaces';
 import { GET_ISSUE } from '../queries'
 import FetchComments from '../FetchComments'
+import IssueCard from './IssueCard'
+
 
 interface Props {
   term: String,
@@ -25,24 +27,21 @@ export const QueryResults: React.FC<Props> = ({ term, searchLocation, issueState
     variables: { queryParameters },
   });
 
+  const [splittedRepoOwner, splittedRepoName] = repoName.split("/")
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;
 
 
-  console.log(data.search.nodes)
-
   if (data.search.nodes.length === 0) return <p>No Data</p>
   return (<div>
 
     {data.search.nodes.map((item: Issue) => {
-      return <div key={item.id}>
-        <h1> {item.title}</h1>
-        <p>{item.body}</p>
-        <span>{item.state}</span>
+      return <IssueCard key={item.id} issue={item}>
+        <FetchComments repoName={splittedRepoName} repoOwner={splittedRepoOwner} issueNumber={item.number} />
+      </IssueCard>
 
-        <FetchComments issueNumber={item.number} />
-      </div>
+
     })}
 
   </div>)
