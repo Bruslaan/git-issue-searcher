@@ -33,8 +33,8 @@ function App() {
       <div className="searchBar">
         <input type="text" placeholder="default: facebook/react" onChange={changeRepoName} />
         <SearchComponent onChangeTerm={changeSearchTerm} />
-        <SelectComponent onSelectChange={changeIssueState} items={[IssueState.both, IssueState.open, IssueState.closed]} />
-        <SelectComponent onSelectChange={changeLocation} items={[SearchLocation.both, SearchLocation.title, SearchLocation.body]} />
+        <SelectComponent selectName="State" onSelectChange={changeIssueState} items={[IssueState.both, IssueState.open, IssueState.closed]} />
+        <SelectComponent selectName="Search Location" onSelectChange={changeLocation} items={[SearchLocation.both, SearchLocation.title, SearchLocation.body]} />
       </div>
 
 

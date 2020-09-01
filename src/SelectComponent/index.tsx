@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 interface Props {
     onSelectChange: (selected: any) => void
     items: Array<any>
+    selectName: String
 }
 
-const SelectComponent: React.FC<Props> = ({ onSelectChange, items }) => {
+const SelectComponent: React.FC<Props> = ({ onSelectChange, items, selectName }) => {
 
     const [selected, setSelected] = useState(items[0])
 
@@ -15,14 +16,21 @@ const SelectComponent: React.FC<Props> = ({ onSelectChange, items }) => {
     }
 
     return (
-        <select value={selected} onChange={handleSelectedChange}>
-            {items.map((item, index) => {
-                return (
-                    <option key={index} value={item}>{item}</option>
-                )
-            })}
+        <div>
+            <span>{selectName}: </span>
+            <select value={selected} onChange={handleSelectedChange}>
 
-        </select>
+                {items.map((item, index) => {
+                    return (
+
+                        <option key={index} value={item}>{item}</option>
+
+                    )
+                })}
+
+            </select>
+        </div>
+
     )
 }
 

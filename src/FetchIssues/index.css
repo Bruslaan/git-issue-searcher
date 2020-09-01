@@ -4,3 +4,10 @@
     margin:10px 0 10px 0;
 
 }
+
+.issue__state{
+    background: gray;
+    border-radius: 100px;
+    padding:5px;
+    color:white;
+}
