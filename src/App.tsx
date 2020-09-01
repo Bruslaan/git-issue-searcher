@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { QueryResults } from './QueryResults/QueryResults'
+import { QueryResults } from './FetchIssues'
 import SearchComponent from './SearchComponent'
 import SelectComponent from './SelectComponent'
 import { client } from './graphQlClient'
@@ -33,8 +33,8 @@ function App() {
       <div className="searchBar">
         <input type="text" placeholder="facebook/react" onChange={changeRepoName} />
         <SearchComponent onChangeTerm={changeSearchTerm} />
-        <SelectComponent onSelectChange={changeIssueState} items={[IssueState.open, IssueState.closed, IssueState.both]} />
-        <SelectComponent onSelectChange={changeLocation} items={[SearchLocation.title, SearchLocation.body]} />
+        <SelectComponent onSelectChange={changeIssueState} items={[IssueState.both, IssueState.open, IssueState.closed]} />
+        <SelectComponent onSelectChange={changeLocation} items={[SearchLocation.both, SearchLocation.title, SearchLocation.body]} />
       </div>
 
 

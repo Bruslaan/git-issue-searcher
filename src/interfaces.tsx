@@ -3,12 +3,15 @@ export interface Issue {
     body: String
     id: number
     state: String
+    endCursor: String
+    hasNextPage: boolean
+    number: number
 }
 
 export enum SearchLocation {
     title = "title",
     body = "body",
-    both = ""
+    both = "both"
 }
 
 export enum IssueState {
